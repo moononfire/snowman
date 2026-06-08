@@ -1,0 +1,67 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: ⛄
+        - generic [ref=e7]: Snowman
+      - navigation [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - img [ref=e10]
+          - text: Dashboard
+        - link "Listy" [ref=e15] [cursor=pointer]:
+          - /url: /lists
+          - img [ref=e16]
+          - text: Listy
+        - link "Kontakty" [ref=e19] [cursor=pointer]:
+          - /url: /contacts
+          - img [ref=e20]
+          - text: Kontakty
+    - main [ref=e25]:
+      - generic [ref=e26]:
+        - heading "Dashboard" [level=1] [ref=e27]
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - img [ref=e31]
+            - generic [ref=e36]:
+              - paragraph [ref=e37]: "10"
+              - paragraph [ref=e38]: Kontakty
+          - generic [ref=e39]:
+            - img [ref=e41]
+            - generic [ref=e44]:
+              - paragraph [ref=e45]: "2"
+              - paragraph [ref=e46]: Listy
+          - generic [ref=e47]:
+            - img [ref=e49]
+            - generic [ref=e51]:
+              - paragraph [ref=e52]: "4"
+              - paragraph [ref=e53]: Przeprowadzone rozmowy
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - heading "Ostatnie listy" [level=2] [ref=e57]
+              - link "Wszystkie" [ref=e58] [cursor=pointer]:
+                - /url: /lists
+            - generic [ref=e59]:
+              - link "SMB — sklepy i usługi 4/4 zadzwoniono" [ref=e60] [cursor=pointer]:
+                - /url: /lists/cmq5m23q8000bhcukj1zyd489
+                - generic [ref=e61]:
+                  - paragraph [ref=e62]: SMB — sklepy i usługi
+                  - paragraph [ref=e63]: 4/4 zadzwoniono
+                - img [ref=e64]
+              - link "Poniedziałek 9.06 — B2B 0/6 zadzwoniono" [ref=e66] [cursor=pointer]:
+                - /url: /lists/cmq5m23no000ahcukpg1wm0gj
+                - generic [ref=e67]:
+                  - paragraph [ref=e68]: Poniedziałek 9.06 — B2B
+                  - paragraph [ref=e69]: 0/6 zadzwoniono
+                - img [ref=e70]
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - img [ref=e74]
+              - heading "Nadchodzące oddzwonienia" [level=2] [ref=e78]
+            - paragraph [ref=e80]: Brak zaplanowanych oddzwonień
+  - button "Włącz ciemny motyw" [active] [ref=e101]:
+    - img [ref=e102]
+  - button "Open Next.js Dev Tools" [ref=e89] [cursor=pointer]:
+    - img [ref=e90]
+  - alert [ref=e100]

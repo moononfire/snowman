@@ -1,0 +1,128 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: ⛄
+        - generic [ref=e7]: Snowman
+      - navigation [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - img [ref=e10]
+          - text: Dashboard
+        - link "Listy" [ref=e15] [cursor=pointer]:
+          - /url: /lists
+          - img [ref=e16]
+          - text: Listy
+        - link "Kontakty" [ref=e19] [cursor=pointer]:
+          - /url: /contacts
+          - img [ref=e20]
+          - text: Kontakty
+    - main [ref=e25]:
+      - generic [ref=e105]:
+        - link "Listy" [ref=e106] [cursor=pointer]:
+          - /url: /lists
+          - img [ref=e107]
+          - text: Listy
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Poniedziałek 9.06 — B2B" [level=1] [ref=e111]
+            - paragraph [ref=e112]: Ciepłe leady z segmentu B2B do pierwszego kontaktu
+            - paragraph [ref=e113]: 0/6 zadzwoniono
+          - generic [ref=e114]:
+            - link "Dodaj kontakty" [ref=e115] [cursor=pointer]:
+              - /url: /lists/cmq5m23no000ahcukpg1wm0gj/add-contacts
+              - button "Dodaj kontakty" [ref=e116]:
+                - img
+                - text: Dodaj kontakty
+            - link "Zacznij/wznów sesję" [ref=e117] [cursor=pointer]:
+              - /url: /lists/cmq5m23no000ahcukpg1wm0gj/session
+              - button "Zacznij/wznów sesję" [ref=e118]:
+                - img
+                - text: Zacznij/wznów sesję
+        - table [ref=e120]:
+          - rowgroup [ref=e121]:
+            - row "# Kontakt Telefon Status Notatka" [ref=e122]:
+              - columnheader "#" [ref=e123]
+              - columnheader "Kontakt" [ref=e124]
+              - columnheader "Telefon" [ref=e125]
+              - columnheader "Status" [ref=e126]
+              - columnheader "Notatka" [ref=e127]
+              - columnheader [ref=e128]
+          - rowgroup [ref=e129]:
+            - row "1 Marek Kowalski· Kowalski & Syn Sp. z o.o. +48 501 234 567 Nie zadzwoniono —" [ref=e130]:
+              - cell "1" [ref=e131]
+              - cell "Marek Kowalski· Kowalski & Syn Sp. z o.o." [ref=e132]:
+                - text: Marek Kowalski
+                - generic [ref=e133]: · Kowalski & Syn Sp. z o.o.
+              - cell "+48 501 234 567" [ref=e134]
+              - cell "Nie zadzwoniono" [ref=e135]:
+                - generic [ref=e136]: Nie zadzwoniono
+              - cell "—" [ref=e137]
+              - cell [ref=e138]:
+                - button [ref=e139]:
+                  - img [ref=e140]
+            - row "2 Anna Nowak· Nowak Consulting +48 512 345 678 Nie zadzwoniono —" [ref=e143]:
+              - cell "2" [ref=e144]
+              - cell "Anna Nowak· Nowak Consulting" [ref=e145]:
+                - text: Anna Nowak
+                - generic [ref=e146]: · Nowak Consulting
+              - cell "+48 512 345 678" [ref=e147]
+              - cell "Nie zadzwoniono" [ref=e148]:
+                - generic [ref=e149]: Nie zadzwoniono
+              - cell "—" [ref=e150]
+              - cell [ref=e151]:
+                - button [ref=e152]:
+                  - img [ref=e153]
+            - row "3 Piotr Wiśniewski· TechStart Sp. z o.o. +48 693 456 789 Nie zadzwoniono —" [ref=e156]:
+              - cell "3" [ref=e157]
+              - cell "Piotr Wiśniewski· TechStart Sp. z o.o." [ref=e158]:
+                - text: Piotr Wiśniewski
+                - generic [ref=e159]: · TechStart Sp. z o.o.
+              - cell "+48 693 456 789" [ref=e160]
+              - cell "Nie zadzwoniono" [ref=e161]:
+                - generic [ref=e162]: Nie zadzwoniono
+              - cell "—" [ref=e163]
+              - cell [ref=e164]:
+                - button [ref=e165]:
+                  - img [ref=e166]
+            - row "4 Tomasz Zając· Agencja Reklamowa Efekt +48 725 678 901 Nie zadzwoniono —" [ref=e169]:
+              - cell "4" [ref=e170]
+              - cell "Tomasz Zając· Agencja Reklamowa Efekt" [ref=e171]:
+                - text: Tomasz Zając
+                - generic [ref=e172]: · Agencja Reklamowa Efekt
+              - cell "+48 725 678 901" [ref=e173]
+              - cell "Nie zadzwoniono" [ref=e174]:
+                - generic [ref=e175]: Nie zadzwoniono
+              - cell "—" [ref=e176]
+              - cell [ref=e177]:
+                - button [ref=e178]:
+                  - img [ref=e179]
+            - row "5 Krzysztof Dąbrowski· Dąbrowski Transport +48 501 890 123 Nie zadzwoniono —" [ref=e182]:
+              - cell "5" [ref=e183]
+              - cell "Krzysztof Dąbrowski· Dąbrowski Transport" [ref=e184]:
+                - text: Krzysztof Dąbrowski
+                - generic [ref=e185]: · Dąbrowski Transport
+              - cell "+48 501 890 123" [ref=e186]
+              - cell "Nie zadzwoniono" [ref=e187]:
+                - generic [ref=e188]: Nie zadzwoniono
+              - cell "—" [ref=e189]
+              - cell [ref=e190]:
+                - button [ref=e191]:
+                  - img [ref=e192]
+            - row "6 Rafał Szymański· Szymański Deweloper +48 693 012 345 Nie zadzwoniono —" [ref=e195]:
+              - cell "6" [ref=e196]
+              - cell "Rafał Szymański· Szymański Deweloper" [ref=e197]:
+                - text: Rafał Szymański
+                - generic [ref=e198]: · Szymański Deweloper
+              - cell "+48 693 012 345" [ref=e199]
+              - cell "Nie zadzwoniono" [ref=e200]:
+                - generic [ref=e201]: Nie zadzwoniono
+              - cell "—" [ref=e202]
+              - cell [ref=e203]:
+                - button [ref=e204]:
+                  - img [ref=e205]
+  - button "Włącz ciemny motyw" [ref=e33]:
+    - img [ref=e34]
+  - button "Open Next.js Dev Tools" [ref=e41] [cursor=pointer]:
+    - img [ref=e42]
+  - alert [ref=e45]

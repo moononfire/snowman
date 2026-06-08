@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Contact {
+  id           String        @id @default(cuid())
+  firstName    String
+  lastName     String?
+  phone        String
+  company      String?
+  position     String?
+  email        String?
+  preCallNote  String?
+  tags         String?
+  source       ContactSource @default(MANUAL)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  listContacts ListContact[]
+}
+
+model List {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  listContacts ListContact[]
+}
+
+model ListContact {
+  id         String      @id @default(cuid())
+  listId     String
+  contactId  String
+  order      Int         @default(0)
+  status     CallStatus  @default(NOT_CALLED)
+  notes      String?
+  followUpAt DateTime?
+  calledAt   DateTime?
+  createdAt  DateTime    @default(now())
+
+  list    List    @relation(fields: [listId], references: [id], onDelete: Cascade)
+  contact Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@unique([listId, contactId])
+  @@index([listId, order])
+}
+
+enum ContactSource {
+  MANUAL
+  CSV_IMPORT
+  GOOGLE_SCRAPE
+}
+
+enum CallStatus {
+  NOT_CALLED
+  INTERESTED
+  NOT_INTERESTED
+  NO_ANSWER
+  CALLBACK
+  VOICEMAIL
+  WRONG_NUMBER
+}

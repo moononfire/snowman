@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: ⛄
+        - generic [ref=e7]: Snowman
+      - navigation [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - img [ref=e10]
+          - text: Dashboard
+        - link "Listy" [ref=e15] [cursor=pointer]:
+          - /url: /lists
+          - img [ref=e16]
+          - text: Listy
+        - link "Kontakty" [ref=e19] [cursor=pointer]:
+          - /url: /contacts
+          - img [ref=e20]
+          - text: Kontakty
+    - main [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - heading "Listy do dzwonienia" [level=1] [ref=e28]
+          - button "Nowa lista" [ref=e29]:
+            - img
+            - text: Nowa lista
+        - paragraph [ref=e32]: Brak list. Kliknij "Nowa lista", żeby zacząć.
+  - button "Włącz ciemny motyw" [ref=e33]:
+    - img [ref=e34]
+  - button "Open Next.js Dev Tools" [ref=e41] [cursor=pointer]:
+    - img [ref=e42]
+  - alert [ref=e45]

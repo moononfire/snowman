@@ -1,0 +1,72 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: ⛄
+        - generic [ref=e7]: Snowman
+      - navigation [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - img [ref=e10]
+          - text: Dashboard
+        - link "Listy" [ref=e15] [cursor=pointer]:
+          - /url: /lists
+          - img [ref=e16]
+          - text: Listy
+        - link "Kontakty" [ref=e19] [cursor=pointer]:
+          - /url: /contacts
+          - img [ref=e20]
+          - text: Kontakty
+    - main [ref=e25]:
+      - generic [ref=e208]:
+        - link "Poniedziałek 9.06 — B2B" [ref=e209] [cursor=pointer]:
+          - /url: /lists/cmq5m23no000ahcukpg1wm0gj
+          - img [ref=e210]
+          - text: Poniedziałek 9.06 — B2B
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - heading "Dodaj kontakty do listy" [level=1] [ref=e214]
+            - paragraph [ref=e215]:
+              - text: Poniedziałek 9.06 — B2B
+              - generic [ref=e216]: · 6 kontaktów już na liście (ukryte)
+          - button "Dodaj kontakty" [disabled]
+        - generic [ref=e217]:
+          - generic [ref=e218]:
+            - generic [ref=e219]:
+              - img [ref=e220]
+              - textbox "Szukaj po nazwie, telefonie, firmie, tagach..." [ref=e223]
+            - generic [ref=e224]:
+              - button "Wszystkie źródła" [ref=e225]
+              - button "Ręczne" [ref=e226]
+              - button "CSV" [ref=e227]
+              - button "Google" [ref=e228]
+            - generic [ref=e229]:
+              - textbox "Filtruj po tagach..." [ref=e230]
+              - generic [ref=e231]:
+                - generic [ref=e232]: "Firma:"
+                - button "Wszystkie" [ref=e233]
+                - button "Z firmą" [ref=e234]
+                - button "Bez firmy" [ref=e235]
+              - generic [ref=e236]:
+                - generic [ref=e237]: "Email:"
+                - button "Wszystkie" [ref=e238]
+                - button "Z emailem" [ref=e239]
+                - button "Bez emaila" [ref=e240]
+          - table [ref=e242]:
+            - rowgroup [ref=e243]:
+              - row "Imię i nazwisko Telefon Firma Email Źródło" [ref=e244]:
+                - columnheader [ref=e245]:
+                  - button [ref=e246]
+                - columnheader "Imię i nazwisko" [ref=e247]
+                - columnheader "Telefon" [ref=e248]
+                - columnheader "Firma" [ref=e249]
+                - columnheader "Email" [ref=e250]
+                - columnheader "Źródło" [ref=e251]
+            - rowgroup [ref=e252]:
+              - row "Ładowanie..." [ref=e253]:
+                - cell "Ładowanie..." [ref=e254]
+  - button "Włącz ciemny motyw" [ref=e33]:
+    - img [ref=e34]
+  - button "Open Next.js Dev Tools" [ref=e41] [cursor=pointer]:
+    - img [ref=e42]
+  - alert [ref=e45]

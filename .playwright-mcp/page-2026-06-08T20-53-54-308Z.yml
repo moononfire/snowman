@@ -1,0 +1,250 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: ⛄
+        - generic [ref=e7]: Snowman
+      - navigation [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - img [ref=e10]
+          - text: Dashboard
+        - link "Listy" [ref=e15] [cursor=pointer]:
+          - /url: /lists
+          - img [ref=e16]
+          - text: Listy
+        - link "Kontakty" [ref=e19] [cursor=pointer]:
+          - /url: /contacts
+          - img [ref=e20]
+          - text: Kontakty
+    - main [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - heading "Kontakty" [level=1] [ref=e28]
+          - generic [ref=e29]:
+            - button "Utwórz listę (1)" [ref=e284]:
+              - img
+              - text: Utwórz listę (1)
+            - button "Importuj CSV" [ref=e30]:
+              - img
+              - text: Importuj CSV
+            - button "Dodaj kontakt" [ref=e31]:
+              - img
+              - text: Dodaj kontakt
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]:
+              - img [ref=e35]
+              - textbox "Szukaj po nazwie, telefonie, firmie, tagach..." [ref=e38]
+            - generic [ref=e39]:
+              - button "Wszystkie źródła" [ref=e40]
+              - button "Ręczne" [ref=e41]
+              - button "CSV" [ref=e42]
+              - button "Google" [ref=e43]
+            - generic [ref=e44]:
+              - textbox "Filtruj po tagach..." [ref=e45]
+              - generic [ref=e46]:
+                - generic [ref=e47]: "Firma:"
+                - button "Wszystkie" [ref=e48]
+                - button "Z firmą" [ref=e49]
+                - button "Bez firmy" [ref=e50]
+              - generic [ref=e51]:
+                - generic [ref=e52]: "Email:"
+                - button "Wszystkie" [ref=e53]
+                - button "Z emailem" [ref=e54]
+                - button "Bez emaila" [ref=e55]
+          - table [ref=e57]:
+            - rowgroup [ref=e58]:
+              - row "Imię i nazwisko Telefon Firma Email Źródło" [ref=e59]:
+                - columnheader [ref=e60]:
+                  - button [ref=e61]:
+                    - img [ref=e285]
+                - columnheader "Imię i nazwisko" [ref=e62]
+                - columnheader "Telefon" [ref=e63]
+                - columnheader "Firma" [ref=e64]
+                - columnheader "Email" [ref=e65]
+                - columnheader "Źródło" [ref=e66]
+                - columnheader [ref=e67]
+            - rowgroup [ref=e68]:
+              - row "Ewa Woźniak· Dyrektoredukacja, SMB +48 604 123 456 Przedszkole Bajkowy Świat e.wozniak@bajkowyswiat.edu.pl Ręczny" [ref=e84] [cursor=pointer]:
+                - cell [ref=e85]:
+                  - button [ref=e86]:
+                    - img [ref=e287]
+                - cell "Ewa Woźniak· Dyrektoredukacja, SMB" [ref=e87]:
+                  - generic [ref=e88]: Ewa Woźniak
+                  - generic [ref=e89]: · Dyrektor
+                  - text: edukacja, SMB
+                - cell "+48 604 123 456" [ref=e90]
+                - cell "Przedszkole Bajkowy Świat" [ref=e91]
+                - cell "e.wozniak@bajkowyswiat.edu.pl" [ref=e92]
+                - cell "Ręczny" [ref=e93]
+                - cell [ref=e94]:
+                  - generic [ref=e95]:
+                    - button [ref=e96]:
+                      - img [ref=e97]
+                    - button [ref=e100]:
+                      - img [ref=e101]
+              - row "Rafał Szymański· PrezesB2B, nieruchomości, duży klient +48 693 012 345 Szymański Deweloper r.szymanski@szymanski-dev.pl Ręczny" [ref=e104] [cursor=pointer]:
+                - cell [ref=e105]:
+                  - button [ref=e106]
+                - cell "Rafał Szymański· PrezesB2B, nieruchomości, duży klient" [ref=e107]:
+                  - generic [ref=e108]: Rafał Szymański
+                  - generic [ref=e109]: · Prezes
+                  - text: B2B, nieruchomości, duży klient
+                - cell "+48 693 012 345" [ref=e110]
+                - cell "Szymański Deweloper" [ref=e111]
+                - cell "r.szymanski@szymanski-dev.pl" [ref=e112]
+                - cell "Ręczny" [ref=e113]
+                - cell [ref=e114]:
+                  - generic [ref=e115]:
+                    - button [ref=e116]:
+                      - img [ref=e117]
+                    - button [ref=e120]:
+                      - img [ref=e121]
+              - row "Joanna Kamińska· Właścicielbeauty, SMB, B2C +48 512 901 234 Salon Beauty Queen joanna@beautyqueen.pl Ręczny" [ref=e124] [cursor=pointer]:
+                - cell [ref=e125]:
+                  - button [ref=e126]
+                - cell "Joanna Kamińska· Właścicielbeauty, SMB, B2C" [ref=e127]:
+                  - generic [ref=e128]: Joanna Kamińska
+                  - generic [ref=e129]: · Właściciel
+                  - text: beauty, SMB, B2C
+                - cell "+48 512 901 234" [ref=e130]
+                - cell "Salon Beauty Queen" [ref=e131]
+                - cell "joanna@beautyqueen.pl" [ref=e132]
+                - cell "Ręczny" [ref=e133]
+                - cell [ref=e134]:
+                  - generic [ref=e135]:
+                    - button [ref=e136]:
+                      - img [ref=e137]
+                    - button [ref=e140]:
+                      - img [ref=e141]
+              - row "Krzysztof Dąbrowski· Dyrektortransport, B2B +48 501 890 123 Dąbrowski Transport k.dabrowski@dabrowski-transport.pl Ręczny" [ref=e144] [cursor=pointer]:
+                - cell [ref=e145]:
+                  - button [ref=e146]
+                - cell "Krzysztof Dąbrowski· Dyrektortransport, B2B" [ref=e147]:
+                  - generic [ref=e148]: Krzysztof Dąbrowski
+                  - generic [ref=e149]: · Dyrektor
+                  - text: transport, B2B
+                - cell "+48 501 890 123" [ref=e150]
+                - cell "Dąbrowski Transport" [ref=e151]
+                - cell "k.dabrowski@dabrowski-transport.pl" [ref=e152]
+                - cell "Ręczny" [ref=e153]
+                - cell [ref=e154]:
+                  - generic [ref=e155]:
+                    - button [ref=e156]:
+                      - img [ref=e157]
+                    - button [ref=e160]:
+                      - img [ref=e161]
+              - row "Monika Lewandowska· Właścicielmedycyna, SMB +48 888 789 012 Gabinet Stomatologiczny Dr Lewandowska monika@drlewandowska.pl Ręczny" [ref=e164] [cursor=pointer]:
+                - cell [ref=e165]:
+                  - button [ref=e166]
+                - cell "Monika Lewandowska· Właścicielmedycyna, SMB" [ref=e167]:
+                  - generic [ref=e168]: Monika Lewandowska
+                  - generic [ref=e169]: · Właściciel
+                  - text: medycyna, SMB
+                - cell "+48 888 789 012" [ref=e170]
+                - cell "Gabinet Stomatologiczny Dr Lewandowska" [ref=e171]
+                - cell "monika@drlewandowska.pl" [ref=e172]
+                - cell "Ręczny" [ref=e173]
+                - cell [ref=e174]:
+                  - generic [ref=e175]:
+                    - button [ref=e176]:
+                      - img [ref=e177]
+                    - button [ref=e180]:
+                      - img [ref=e181]
+              - row "Tomasz Zając· Dyrektor SprzedażyB2B, marketing +48 725 678 901 Agencja Reklamowa Efekt t.zajac@agencjaefekt.pl Ręczny" [ref=e184] [cursor=pointer]:
+                - cell [ref=e185]:
+                  - button [ref=e186]
+                - cell "Tomasz Zając· Dyrektor SprzedażyB2B, marketing" [ref=e187]:
+                  - generic [ref=e188]: Tomasz Zając
+                  - generic [ref=e189]: · Dyrektor Sprzedaży
+                  - text: B2B, marketing
+                - cell "+48 725 678 901" [ref=e190]
+                - cell "Agencja Reklamowa Efekt" [ref=e191]
+                - cell "t.zajac@agencjaefekt.pl" [ref=e192]
+                - cell "Ręczny" [ref=e193]
+                - cell [ref=e194]:
+                  - generic [ref=e195]:
+                    - button [ref=e196]:
+                      - img [ref=e197]
+                    - button [ref=e200]:
+                      - img [ref=e201]
+              - row "Katarzyna Wójcik· WłaścicielSMB, ecommerce +48 604 567 890 Sklep Ogrodniczy Zielony Raj k.wojcik@zielonyraj.pl Ręczny" [ref=e204] [cursor=pointer]:
+                - cell [ref=e205]:
+                  - button [ref=e206]
+                - cell "Katarzyna Wójcik· WłaścicielSMB, ecommerce" [ref=e207]:
+                  - generic [ref=e208]: Katarzyna Wójcik
+                  - generic [ref=e209]: · Właściciel
+                  - text: SMB, ecommerce
+                - cell "+48 604 567 890" [ref=e210]
+                - cell "Sklep Ogrodniczy Zielony Raj" [ref=e211]
+                - cell "k.wojcik@zielonyraj.pl" [ref=e212]
+                - cell "Ręczny" [ref=e213]
+                - cell [ref=e214]:
+                  - generic [ref=e215]:
+                    - button [ref=e216]:
+                      - img [ref=e217]
+                    - button [ref=e220]:
+                      - img [ref=e221]
+              - row "Piotr Wiśniewski· CTOB2B, tech, startup +48 693 456 789 TechStart Sp. z o.o. p.wisniewski@techstart.io Ręczny" [ref=e224] [cursor=pointer]:
+                - cell [ref=e225]:
+                  - button [ref=e226]
+                - cell "Piotr Wiśniewski· CTOB2B, tech, startup" [ref=e227]:
+                  - generic [ref=e228]: Piotr Wiśniewski
+                  - generic [ref=e229]: · CTO
+                  - text: B2B, tech, startup
+                - cell "+48 693 456 789" [ref=e230]
+                - cell "TechStart Sp. z o.o." [ref=e231]
+                - cell "p.wisniewski@techstart.io" [ref=e232]
+                - cell "Ręczny" [ref=e233]
+                - cell [ref=e234]:
+                  - generic [ref=e235]:
+                    - button [ref=e236]:
+                      - img [ref=e237]
+                    - button [ref=e240]:
+                      - img [ref=e241]
+              - row "Anna Nowak· CEOB2B, consulting +48 512 345 678 Nowak Consulting anna@nowakconsulting.pl Ręczny" [ref=e244] [cursor=pointer]:
+                - cell [ref=e245]:
+                  - button [ref=e246]
+                - cell "Anna Nowak· CEOB2B, consulting" [ref=e247]:
+                  - generic [ref=e248]: Anna Nowak
+                  - generic [ref=e249]: · CEO
+                  - text: B2B, consulting
+                - cell "+48 512 345 678" [ref=e250]
+                - cell "Nowak Consulting" [ref=e251]
+                - cell "anna@nowakconsulting.pl" [ref=e252]
+                - cell "Ręczny" [ref=e253]
+                - cell [ref=e254]:
+                  - generic [ref=e255]:
+                    - button [ref=e256]:
+                      - img [ref=e257]
+                    - button [ref=e260]:
+                      - img [ref=e261]
+              - row "Marek Kowalski· PrezesB2B, budowlanka, ciepły +48 501 234 567 Kowalski & Syn Sp. z o.o. m.kowalski@kowalski.pl Ręczny" [ref=e264] [cursor=pointer]:
+                - cell [ref=e265]:
+                  - button [ref=e266]
+                - cell "Marek Kowalski· PrezesB2B, budowlanka, ciepły" [ref=e267]:
+                  - generic [ref=e268]: Marek Kowalski
+                  - generic [ref=e269]: · Prezes
+                  - text: B2B, budowlanka, ciepły
+                - cell "+48 501 234 567" [ref=e270]
+                - cell "Kowalski & Syn Sp. z o.o." [ref=e271]
+                - cell "m.kowalski@kowalski.pl" [ref=e272]
+                - cell "Ręczny" [ref=e273]
+                - cell [ref=e274]:
+                  - generic [ref=e275]:
+                    - button [ref=e276]:
+                      - img [ref=e277]
+                    - button [ref=e280]:
+                      - img [ref=e281]
+        - generic [ref=e289]:
+          - generic [ref=e290]: 1 zaznaczonych
+          - button "Utwórz listę" [ref=e291]:
+            - img
+            - text: Utwórz listę
+          - button "Wyczyść" [ref=e292]
+  - button "Włącz ciemny motyw" [ref=e71]:
+    - img [ref=e72]
+  - button "Open Next.js Dev Tools" [ref=e79] [cursor=pointer]:
+    - img [ref=e80]
+  - alert [ref=e83]
