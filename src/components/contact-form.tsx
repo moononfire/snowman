@@ -16,6 +16,7 @@ type Contact = {
   position: string | null;
   email: string | null;
   preCallNote: string | null;
+  postCallNote: string | null;
   tags: string | null;
 };
 
@@ -36,6 +37,7 @@ export function ContactForm({
     position: contact?.position ?? "",
     email: contact?.email ?? "",
     preCallNote: contact?.preCallNote ?? "",
+    postCallNote: contact?.postCallNote ?? "",
     tags: contact?.tags ?? "",
   });
   const [saving, setSaving] = useState(false);
@@ -97,15 +99,27 @@ export function ContactForm({
             <Label>Email</Label>
             <Input value={form.email} onChange={set("email")} className="mt-1" type="email" />
           </div>
-          <div>
-            <Label>Notatka przed rozmową</Label>
-            <Textarea
-              value={form.preCallNote}
-              onChange={set("preCallNote")}
-              className="mt-1"
-              rows={2}
-              placeholder="Kontekst, co wiemy o osobie..."
-            />
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <Label>Notatka przed rozmową</Label>
+              <Textarea
+                value={form.preCallNote}
+                onChange={set("preCallNote")}
+                className="mt-1"
+                rows={2}
+                placeholder="Kontekst, co wiemy o osobie..."
+              />
+            </div>
+            <div>
+              <Label>Notatka po rozmowie</Label>
+              <Textarea
+                value={form.postCallNote}
+                onChange={set("postCallNote")}
+                className="mt-1"
+                rows={2}
+                placeholder="Co ustalono, co warto zapamiętać..."
+              />
+            </div>
           </div>
           <div>
             <Label>Tagi (oddziel przecinkiem)</Label>

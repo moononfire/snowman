@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, ReactNode } from "react";
 import { Search, Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { CONTACT_SOURCE_LABELS, CONTACT_SOURCE_COLORS } from "@/lib/types";
+import { CONTACT_SOURCE_LABELS, CONTACT_SOURCE_COLORS, CALL_STATUS_LABELS, CALL_STATUS_COLORS, type CallStatus } from "@/lib/types";
 
 type ContactSource = "MANUAL" | "CSV_IMPORT" | "GOOGLE_SCRAPE";
 
@@ -16,8 +16,10 @@ export type Contact = {
   position: string | null;
   email: string | null;
   preCallNote: string | null;
+  postCallNote: string | null;
   tags: string | null;
   source: ContactSource;
+  listContacts: { status: CallStatus; notes: string | null; calledAt: string | null }[];
 };
 
 const SOURCE_FILTERS = [
@@ -25,6 +27,12 @@ const SOURCE_FILTERS = [
   { value: "MANUAL", label: "Ręczne" },
   { value: "CSV_IMPORT", label: "CSV" },
   { value: "GOOGLE_SCRAPE", label: "Google" },
+] as const;
+
+const CALLED_FILTERS = [
+  { value: "", label: "Wszyscy" },
+  { value: "yes", label: "Obdzwonieni" },
+  { value: "no", label: "Nieobdzwonieni" },
 ] as const;
 
 const COMPANY_FILTERS = [
@@ -62,6 +70,7 @@ export function ContactsBrowser({
   const [tagsFilter, setTagsFilter] = useState("");
   const [companyFilter, setCompanyFilter] = useState("");
   const [emailFilter, setEmailFilter] = useState("");
+  const [calledFilter, setCalledFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
   const excludeIdsKey = excludeIds.join(",");
@@ -74,6 +83,7 @@ export function ContactsBrowser({
     if (tagsFilter) params.set("tags", tagsFilter);
     if (companyFilter) params.set("hasCompany", companyFilter);
     if (emailFilter) params.set("hasEmail", emailFilter);
+    if (calledFilter) params.set("called", calledFilter);
     const res = await fetch(`/api/contacts?${params}`);
     if (res.ok) {
       const all: Contact[] = await res.json();
@@ -82,7 +92,7 @@ export function ContactsBrowser({
     }
     setLoading(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, sourceFilter, tagsFilter, companyFilter, emailFilter, excludeIdsKey, refreshKey]);
+  }, [search, sourceFilter, tagsFilter, companyFilter, emailFilter, calledFilter, excludeIdsKey, refreshKey]);
 
   useEffect(() => {
     const t = setTimeout(fetchContacts, 200);
@@ -109,8 +119,8 @@ export function ContactsBrowser({
 
   const allSelected = contacts.length > 0 && contacts.every((c) => selected.has(c.id));
   const someSelected = !allSelected && contacts.some((c) => selected.has(c.id));
-  const hasFilters = search || sourceFilter || tagsFilter || companyFilter || emailFilter;
-  const colCount = 5 + (selectable ? 1 : 0) + (rowActions ? 1 : 0);
+  const hasFilters = search || sourceFilter || tagsFilter || companyFilter || emailFilter || calledFilter;
+  const colCount = 9 + (selectable ? 1 : 0) + (rowActions ? 1 : 0);
 
   return (
     <div>
@@ -182,6 +192,23 @@ export function ContactsBrowser({
               </button>
             ))}
           </div>
+
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs text-muted-foreground">Rozmowy:</span>
+            {CALLED_FILTERS.map((f) => (
+              <button
+                key={f.value}
+                onClick={() => setCalledFilter(f.value)}
+                className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
+                  calledFilter === f.value
+                    ? "bg-foreground text-background"
+                    : "bg-muted text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -210,6 +237,10 @@ export function ContactsBrowser({
               <th className="text-left px-4 py-3 font-medium text-muted-foreground">Firma</th>
               <th className="text-left px-4 py-3 font-medium text-muted-foreground">Email</th>
               <th className="text-left px-4 py-3 font-medium text-muted-foreground">Źródło</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Status</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Ostatnia notatka</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Notatka przed</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Notatka po</th>
               {rowActions && <th className="px-4 py-3 w-20" />}
             </tr>
           </thead>
@@ -272,6 +303,24 @@ export function ContactsBrowser({
                   >
                     {CONTACT_SOURCE_LABELS[c.source]}
                   </span>
+                </td>
+                <td className="px-4 py-3">
+                  {c.listContacts[0] ? (
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${CALL_STATUS_COLORS[c.listContacts[0].status]}`}>
+                      {CALL_STATUS_LABELS[c.listContacts[0].status]}
+                    </span>
+                  ) : (
+                    <span className="text-muted-foreground text-xs">—</span>
+                  )}
+                </td>
+                <td className="px-4 py-3 text-muted-foreground text-xs max-w-[180px] truncate">
+                  {c.listContacts[0]?.notes ?? "—"}
+                </td>
+                <td className="px-4 py-3 text-muted-foreground text-xs max-w-[160px] truncate">
+                  {c.preCallNote ?? "—"}
+                </td>
+                <td className="px-4 py-3 text-muted-foreground text-xs max-w-[160px] truncate">
+                  {c.postCallNote ?? "—"}
                 </td>
                 {rowActions && (
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>

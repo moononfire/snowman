@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
   const tagsParam = req.nextUrl.searchParams.get("tags") ?? "";
   const hasCompanyParam = req.nextUrl.searchParams.get("hasCompany") ?? "";
   const hasEmailParam = req.nextUrl.searchParams.get("hasEmail") ?? "";
+  const calledParam = req.nextUrl.searchParams.get("called") ?? "";
   const source = VALID_SOURCES.has(sourceParam) ? (sourceParam as ContactSource) : null;
 
   const where: Prisma.ContactWhereInput = {};
@@ -21,6 +22,8 @@ export async function GET(req: NextRequest) {
   if (hasCompanyParam === "no") where.company = null;
   if (hasEmailParam === "yes") where.email = { not: null };
   if (hasEmailParam === "no") where.email = null;
+  if (calledParam === "yes") where.listContacts = { some: { status: { not: "NOT_CALLED" } } };
+  if (calledParam === "no") where.listContacts = { none: { status: { not: "NOT_CALLED" } } };
   if (search) {
     where.OR = [
       { firstName: { contains: search, mode: "insensitive" } },
@@ -32,7 +35,18 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const contacts = await prisma.contact.findMany({ where, orderBy: { createdAt: "desc" } });
+    const contacts = await prisma.contact.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      include: {
+        listContacts: {
+          where: { status: { not: "NOT_CALLED" } },
+          orderBy: { calledAt: "desc" },
+          take: 1,
+          select: { status: true, notes: true, calledAt: true },
+        },
+      },
+    });
     return NextResponse.json(contacts);
   } catch (err) {
     console.error(err);
@@ -51,6 +65,7 @@ export async function POST(req: NextRequest) {
       position: body.position || null,
       email: body.email || null,
       preCallNote: body.preCallNote || null,
+      postCallNote: body.postCallNote || null,
       tags: body.tags || null,
       source: "MANUAL",
     },

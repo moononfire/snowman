@@ -15,6 +15,7 @@ model Contact {
   position     String?
   email        String?
   preCallNote  String?
+  postCallNote String?
   tags         String?
   source       ContactSource @default(MANUAL)
   createdAt    DateTime      @default(now())
