@@ -45,6 +45,7 @@ export async function GET(req: NextRequest) {
           take: 1,
           select: { status: true, notes: true, calledAt: true },
         },
+        _count: { select: { listContacts: true } },
       },
     });
     return NextResponse.json(contacts);

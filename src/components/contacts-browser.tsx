@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, ReactNode } from "react";
-import { Search, Check } from "lucide-react";
+import { Search, Check, Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { CONTACT_SOURCE_LABELS, CONTACT_SOURCE_COLORS, CALL_STATUS_LABELS, CALL_STATUS_COLORS, type CallStatus } from "@/lib/types";
 
@@ -20,6 +20,7 @@ export type Contact = {
   tags: string | null;
   source: ContactSource;
   listContacts: { status: CallStatus; notes: string | null; calledAt: string | null }[];
+  _count?: { listContacts: number };
 };
 
 const SOURCE_FILTERS = [
@@ -99,26 +100,32 @@ export function ContactsBrowser({
     return () => clearTimeout(t);
   }, [fetchContacts]);
 
-  function toggleContact(id: string) {
+  function isOccupied(c: Contact) {
+    return selectable && (c._count?.listContacts ?? 0) > 0;
+  }
+
+  function toggleContact(c: Contact) {
+    if (isOccupied(c)) return;
     const next = new Set(selected);
-    next.has(id) ? next.delete(id) : next.add(id);
+    next.has(c.id) ? next.delete(c.id) : next.add(c.id);
     onSelectionChange(next);
   }
 
   function toggleAll() {
-    const allIds = contacts.map((c) => c.id);
-    const allSelected = allIds.every((id) => selected.has(id));
+    const availableIds = contacts.filter((c) => !isOccupied(c)).map((c) => c.id);
+    const allSelected = availableIds.every((id) => selected.has(id));
     const next = new Set(selected);
     if (allSelected) {
-      allIds.forEach((id) => next.delete(id));
+      availableIds.forEach((id) => next.delete(id));
     } else {
-      allIds.forEach((id) => next.add(id));
+      availableIds.forEach((id) => next.add(id));
     }
     onSelectionChange(next);
   }
 
-  const allSelected = contacts.length > 0 && contacts.every((c) => selected.has(c.id));
-  const someSelected = !allSelected && contacts.some((c) => selected.has(c.id));
+  const availableContacts = contacts.filter((c) => !isOccupied(c));
+  const allSelected = availableContacts.length > 0 && availableContacts.every((c) => selected.has(c.id));
+  const someSelected = !allSelected && availableContacts.some((c) => selected.has(c.id));
   const hasFilters = search || sourceFilter || tagsFilter || companyFilter || emailFilter || calledFilter;
   const colCount = 9 + (selectable ? 1 : 0) + (rowActions ? 1 : 0);
 
@@ -259,78 +266,92 @@ export function ContactsBrowser({
                 </td>
               </tr>
             )}
-            {contacts.map((c) => (
-              <tr
-                key={c.id}
-                className={`hover:bg-muted/50 ${selectable ? "cursor-pointer select-none" : ""} ${
-                  selectable && selected.has(c.id) ? "bg-blue-500/5" : ""
-                }`}
-                onClick={selectable ? () => toggleContact(c.id) : undefined}
-              >
-                {selectable && (
-                  <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
-                    <button
-                      onClick={() => toggleContact(c.id)}
-                      className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors mx-auto ${
-                        selected.has(c.id) ? "bg-blue-600 border-blue-600" : "border-border"
+            {contacts.map((c) => {
+              const occupied = isOccupied(c);
+              return (
+                <tr
+                  key={c.id}
+                  className={`${occupied ? "opacity-40 cursor-not-allowed" : ""} ${
+                    selectable && !occupied ? "hover:bg-muted/50 cursor-pointer select-none" : ""
+                  } ${selectable && selected.has(c.id) ? "bg-blue-500/5" : ""}`}
+                  onClick={selectable && !occupied ? () => toggleContact(c) : undefined}
+                >
+                  {selectable && (
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                      {occupied ? (
+                        <div className="w-5 h-5 flex items-center justify-center mx-auto text-muted-foreground">
+                          <Lock className="h-3.5 w-3.5" />
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => toggleContact(c)}
+                          className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors mx-auto ${
+                            selected.has(c.id) ? "bg-blue-600 border-blue-600" : "border-border"
+                          }`}
+                        >
+                          {selected.has(c.id) && <Check className="h-3 w-3 text-white" />}
+                        </button>
+                      )}
+                    </td>
+                  )}
+                  <td className="px-4 py-3 font-medium text-foreground">
+                    <span>
+                      {c.firstName} {c.lastName}
+                    </span>
+                    {c.position && (
+                      <span className="ml-1 text-muted-foreground font-normal">· {c.position}</span>
+                    )}
+                    {c.tags && (
+                      <span className="ml-2 text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+                        {c.tags}
+                      </span>
+                    )}
+                    {occupied && (
+                      <span className="ml-2 text-xs text-amber-600 dark:text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded">
+                        zajęty
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 font-mono text-foreground">{c.phone}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{c.company ?? "—"}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{c.email ?? "—"}</td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                        CONTACT_SOURCE_COLORS[c.source]
                       }`}
                     >
-                      {selected.has(c.id) && <Check className="h-3 w-3 text-white" />}
-                    </button>
-                  </td>
-                )}
-                <td className="px-4 py-3 font-medium text-foreground">
-                  <span>
-                    {c.firstName} {c.lastName}
-                  </span>
-                  {c.position && (
-                    <span className="ml-1 text-muted-foreground font-normal">· {c.position}</span>
-                  )}
-                  {c.tags && (
-                    <span className="ml-2 text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
-                      {c.tags}
+                      {CONTACT_SOURCE_LABELS[c.source]}
                     </span>
-                  )}
-                </td>
-                <td className="px-4 py-3 font-mono text-foreground">{c.phone}</td>
-                <td className="px-4 py-3 text-muted-foreground">{c.company ?? "—"}</td>
-                <td className="px-4 py-3 text-muted-foreground">{c.email ?? "—"}</td>
-                <td className="px-4 py-3">
-                  <span
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                      CONTACT_SOURCE_COLORS[c.source]
-                    }`}
-                  >
-                    {CONTACT_SOURCE_LABELS[c.source]}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  {c.listContacts[0] ? (
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${CALL_STATUS_COLORS[c.listContacts[0].status]}`}>
-                      {CALL_STATUS_LABELS[c.listContacts[0].status]}
-                    </span>
-                  ) : (
-                    <span className="text-muted-foreground text-xs">—</span>
-                  )}
-                </td>
-                <td className="px-4 py-3 text-muted-foreground text-xs max-w-[180px] truncate">
-                  {c.listContacts[0]?.notes ?? "—"}
-                </td>
-                <td className="px-4 py-3 text-muted-foreground text-xs max-w-[160px] truncate">
-                  {c.preCallNote ?? "—"}
-                </td>
-                <td className="px-4 py-3 text-muted-foreground text-xs max-w-[160px] truncate">
-                  {c.postCallNote ?? "—"}
-                </td>
-                {rowActions && (
-                  <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex items-center gap-1 justify-end">
-                      {rowActions(c)}
-                    </div>
                   </td>
-                )}
-              </tr>
-            ))}
+                  <td className="px-4 py-3">
+                    {c.listContacts[0] ? (
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${CALL_STATUS_COLORS[c.listContacts[0].status]}`}>
+                        {CALL_STATUS_LABELS[c.listContacts[0].status]}
+                      </span>
+                    ) : (
+                      <span className="text-muted-foreground text-xs">—</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs max-w-[180px] truncate">
+                    {c.listContacts[0]?.notes ?? "—"}
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs max-w-[160px] truncate">
+                    {c.preCallNote ?? "—"}
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs max-w-[160px] truncate">
+                    {c.postCallNote ?? "—"}
+                  </td>
+                  {rowActions && (
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center gap-1 justify-end">
+                        {rowActions(c)}
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

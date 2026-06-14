@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, ListChecks } from "lucide-react";
+import { LayoutDashboard, Users, ListChecks, LogOut } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 
 const nav = [
@@ -13,6 +14,7 @@ const nav = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   return (
     <aside className="w-56 bg-card border-r border-border flex flex-col shrink-0">
@@ -39,6 +41,25 @@ export function Sidebar() {
           </Link>
         ))}
       </nav>
+      {session?.user && (
+        <div className="px-3 py-3 border-t border-border">
+          <div className="flex items-center gap-2 px-2 py-1 mb-1">
+            <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-xs font-semibold text-blue-600">
+              {(session.user.name ?? session.user.email ?? "?")[0].toUpperCase()}
+            </div>
+            <span className="text-xs text-muted-foreground truncate flex-1">
+              {session.user.name ?? session.user.email}
+            </span>
+          </div>
+          <button
+            onClick={() => signOut({ callbackUrl: "/sign-in" })}
+            className="flex items-center gap-2 w-full px-2 py-1.5 rounded-md text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          >
+            <LogOut className="h-3.5 w-3.5" />
+            Wyloguj się
+          </button>
+        </div>
+      )}
     </aside>
   );
 }
